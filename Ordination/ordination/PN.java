@@ -11,7 +11,7 @@ public class PN extends Ordination {
 	public PN(LocalDate startDen, LocalDate slutDen) {
 		super(startDen, slutDen);
 		this.antalEnheder = 0;
-		this.antalGangeGivet = 0;	
+		this.antalGangeGivet = 0;
 	}
 
 	/**
@@ -25,8 +25,9 @@ public class PN extends Ordination {
 	public boolean givDosis(LocalDate givesDen) {
 		if (givesDen.isAfter(this.getStartDen()) && givesDen.isBefore(this.getSlutDen())) {
 			return true;
-		} else
+		} else {
 			return false;
+		}
 	}
 
 	/**

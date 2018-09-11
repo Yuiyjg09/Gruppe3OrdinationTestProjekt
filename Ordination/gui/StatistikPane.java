@@ -73,14 +73,11 @@ public class StatistikPane extends GridPane {
 		try {
 			int vFra = Integer.valueOf(txfVægtFra.getText());
 			int vTil = Integer.valueOf(txfVægtTil.getText());
-			Laegemiddel lægemiddel = lstLægemidler.getSelectionModel()
-					.getSelectedItem();
-			int antal = service.antalOrdinationerPrVægtPrLægemiddel(vFra, vTil,
-					lægemiddel);
+			Laegemiddel lægemiddel = lstLægemidler.getSelectionModel().getSelectedItem();
+			int antal = service.antalOrdinationerPrVægtPrLægemiddel(vFra, vTil, lægemiddel);
 			ordinationerPerVægtPerLægemiddel.setText(antal + "");
 		} catch (NumberFormatException e) {
 			ordinationerPerVægtPerLægemiddel.setText("");
 		}
 	}
-
 }

@@ -57,8 +57,6 @@ public class MainApp extends Application {
 		tabPane.getTabs().add(tabVis);
 		tabPane.getTabs().add(tabStatistik);
 
-		tabVis.setOnSelectionChanged(event -> visOrdinationPane
-				.updateControls());
+		tabVis.setOnSelectionChanged(event -> visOrdinationPane.updateControls());
 	}
-
 }

@@ -21,7 +21,7 @@ public class OpretOrdinationPane extends GridPane {
 	private ToggleGroup toggleGroup = new ToggleGroup();
 	private RadioButton rbPN = new RadioButton("PN");
 	private RadioButton rbFast = new RadioButton("Daglig fast");
-	private RadioButton rbSkaev = new RadioButton("Daglig skÃ¦v");
+	private RadioButton rbSkaev = new RadioButton("Daglig skæv");
 	private Button btnOpret = new Button("Opret ordination");
 	private Label lblError;
 
@@ -46,15 +46,15 @@ public class OpretOrdinationPane extends GridPane {
 		toggleGroup.getToggles().add(rbSkaev);
 		toggleGroup.getToggles().add(rbFast);
 
-		this.add(new Label("VÃ¦lg patient"), 0, 0);
+		this.add(new Label("Vælg patient"), 0, 0);
 		this.add(lstPatient, 0, 1, 1, 2);
 		lstPatient.getItems().setAll(service.getAllPatienter());
 
-		this.add(new Label("VÃ¦lg lÃ¦gemiddel"), 1, 0);
+		this.add(new Label("Vælg lægemiddel"), 1, 0);
 		this.add(lstLaegemiddel, 1, 1, 1, 2);
 		lstLaegemiddel.getItems().setAll(service.getAllLaegemidler());
 
-		this.add(new Label("VÃ¦lg ordination"), 2, 0);
+		this.add(new Label("Vælg ordination"), 2, 0);
 		GridPane innerPane = new GridPane();
 		innerPane.setVgap(10);
 		innerPane.add(rbPN, 0, 0);
@@ -77,17 +77,15 @@ public class OpretOrdinationPane extends GridPane {
 	public void actionOpret() {
 		lblError.setText("");
 		if (lstPatient.getSelectionModel().getSelectedItem() == null) {
-			lblError.setText("Du skal vÃ¦lge en patient.");
+			lblError.setText("Du skal vælge en patient.");
 		} else if (lstLaegemiddel.getSelectionModel().getSelectedItem() == null) {
-			lblError.setText("Du skal vÃ¦lge et lÃ¦gemiddel.");
+			lblError.setText("Du skal vælge et lægemiddel.");
 		} else if (toggleGroup.getSelectedToggle() == null) {
-			lblError.setText("Du skal vÃ¦lge en ordinationstype.");
+			lblError.setText("Du skal vælge en ordinationstype.");
 		} else {
-			OpretOrdinationDialog dia = new OpretOrdinationDialog(lstPatient
-					.getSelectionModel().getSelectedItem(), lstLaegemiddel
-					.getSelectionModel().getSelectedItem(),
-					(TypeOrdination) toggleGroup.getSelectedToggle()
-					.getUserData());
+			OpretOrdinationDialog dia = new OpretOrdinationDialog(lstPatient.getSelectionModel().getSelectedItem(),
+					lstLaegemiddel.getSelectionModel().getSelectedItem(),
+					(TypeOrdination) toggleGroup.getSelectedToggle().getUserData());
 			dia.showAndWait();
 		}
 	}

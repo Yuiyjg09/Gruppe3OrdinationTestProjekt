@@ -36,13 +36,7 @@ public class DagligFast extends Ordination {
 
 	@Override
 	public double doegnDosis() {
-		double doegn = 0.0;
-		for (Dosis d : doser) {
-			if (d != null) {
-				doegn += d.getAntal();
-			}
-		}
-		return doegn / antalDage();
+		return samletDosis() / super.antalDage();
 	}
 
 	@Override

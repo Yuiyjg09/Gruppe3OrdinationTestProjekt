@@ -8,6 +8,7 @@ import com.sun.istack.internal.NotNull;
 import ordination.DagligFast;
 import ordination.DagligSkaev;
 import ordination.Laegemiddel;
+import ordination.Ordination;
 import ordination.PN;
 import ordination.Patient;
 import storage.Storage;
@@ -86,32 +87,49 @@ public class Service {
 	}
 
 	/**
-	 * Opretter og returnerer en DagligSkÃ¦v ordination. Hvis startDato er efter
+	 * Opretter og returnerer en DagligSkæv ordination. Hvis startDato er efter
 	 * slutDato kastes en IllegalArgumentException og ordinationen oprettes ikke.
 	 * Hvis antallet af elementer i klokkeSlet og antalEnheder er forskellige kastes
-	 * ogsÃ¥ en IllegalArgumentException.
+	 * også en IllegalArgumentException.
 	 *
 	 * Pre: startDen, slutDen, patient og laegemiddel er ikke null
 	 */
 	public DagligSkaev opretDagligSkaevOrdination(LocalDate startDen, LocalDate slutDen, Patient patient,
 			Laegemiddel laegemiddel, LocalTime[] klokkeSlet, double[] antalEnheder) {
-		// TODO
-		return null;
+		if (startDen.isAfter(slutDen)) {
+			throw new IllegalArgumentException("");
+		}
+		if (klokkeSlet.length != antalEnheder.length) {
+			throw new IllegalArgumentException("");
+		}
+		DagligSkaev dagligSkaev = new DagligSkaev(startDen, slutDen);
+		for (int i = 0; i < antalEnheder.length; i++) {
+			dagligSkaev.opretDosis(klokkeSlet[i], antalEnheder[i]);
+		}
+		dagligSkaev.setLaegemiddel(laegemiddel);
+		patient.addOrdination(dagligSkaev);
+		return dagligSkaev;
 	}
 
 	/**
-	 * En dato for hvornÃ¥r ordinationen anvendes tilfÃ¸jes ordinationen. Hvis
+	 * En dato for hvornår ordinationen anvendes tilføjes ordinationen. Hvis
 	 * datoen ikke er indenfor ordinationens gyldighedsperiode kastes en
 	 * IllegalArgumentException Pre: ordination og dato er ikke null
 	 */
 	public void ordinationPNAnvendt(PN ordination, LocalDate dato) {
-		// TODO
+		if (ordination.getStartDen().isBefore(dato)) {
+			throw new IllegalArgumentException("");
+		}
+		if (ordination.getSlutDen().isBefore(dato)) {
+			throw new IllegalArgumentException("");
+		}
+		ordination.givDosis(dato);
 	}
 
 	/**
-	 * Den anbefalede dosis for den pÃ¥gÃ¦ldende patient (der skal tages hensyn til
-	 * patientens vÃ¦gt). Det er en forskellig enheds faktor der skal anvendes, og
-	 * den er afhÃ¦ngig af patientens vÃ¦gt. Pre: patient og lÃ¦gemiddel er ikke
+	 * Den anbefalede dosis for den pågældende patient (der skal tages hensyn til
+	 * patientens vægt). Det er en forskellig enheds faktor der skal anvendes, og
+	 * den er afhængig af patientens vægt. Pre: patient og lægemiddel er ikke
 	 * null
 	 */
 	public double anbefaletDosisPrDoegn(Patient patient, Laegemiddel laegemiddel) {
@@ -127,12 +145,21 @@ public class Service {
 	}
 
 	/**
-	 * For et givent vÃ¦gtinterval og et givent lÃ¦gemiddel, hentes antallet af
+	 * For et givent vægtinterval og et givent lægemiddel, hentes antallet af
 	 * ordinationer. Pre: laegemiddel er ikke null
 	 */
 	public int antalOrdinationerPrVægtPrLægemiddel(double vægtStart, double vægtSlut, Laegemiddel laegemiddel) {
-		// TODO
-		return 0;
+		int ordinationer = 0;
+		for (Patient p : getAllPatienter()) {
+			if (p.getVaegt() >= vægtStart && p.getVaegt() <= vægtSlut) {
+				for (Ordination o : p.getOrdinationer()) {
+					if (o.getLaegemiddel().equals(laegemiddel)) {
+						ordinationer++;
+					}
+				}
+			}
+		}
+		return ordinationer;
 	}
 
 	public List<Patient> getAllPatienter() {
@@ -144,9 +171,9 @@ public class Service {
 	}
 
 	/**
-	 * Metode der kan bruges til at checke at en startDato ligger fÃ¸r en slutDato.
+	 * Metode der kan bruges til at checke at en startDato ligger før en slutDato.
 	 *
-	 * @return true hvis startDato er fÃ¸r slutDato, false ellers.
+	 * @return true hvis startDato er før slutDato, false ellers.
 	 */
 	private boolean checkStartFoerSlut(LocalDate startDato, LocalDate slutDato) {
 		boolean result = true;
@@ -173,7 +200,7 @@ public class Service {
 	public void createSomeObjects() {
 		opretPatient("121256-0512", "Jane Jensen", 63.4);
 		opretPatient("070985-1153", "Finn Madsen", 83.2);
-		opretPatient("050972-1233", "Hans JÃ¸rgensen", 89.4);
+		opretPatient("050972-1233", "Hans Jørgensen", 89.4);
 		opretPatient("011064-1522", "Ulla Nielsen", 59.9);
 		opretPatient("090149-2529", "Ib Hansen", 87.7);
 
