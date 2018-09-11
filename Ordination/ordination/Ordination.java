@@ -25,7 +25,7 @@ public abstract class Ordination {
     /**
      * Antal hele dage mellem startdato og slutdato. Begge dage inklusive.
      *
-     * @return antal dage ordinationen gÃ¦lder for
+     * @return antal dage ordinationen gælder for
      */
     public int antalDage() {
         return (int) ChronoUnit.DAYS.between(startDen, slutDen) + 1;
