@@ -1,6 +1,6 @@
 package ordination;
 
-import com.sun.istack.internal.NotNull;
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,7 +10,7 @@ public class DagligSkaev extends Ordination {
 
     private ArrayList<Dosis> doses = new ArrayList<>();
 
-    public DagligSkaev(@NotNull LocalDate startDen, @NotNull LocalDate slutDen) {
+    public DagligSkaev( LocalDate startDen,  LocalDate slutDen) {
         super(startDen, slutDen);
     }
 

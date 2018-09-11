@@ -38,8 +38,8 @@ public class Service {
      *
      * @return opretter og returnerer en PN ordination.
      */
-    public PN opretPNOrdination(@NotNull LocalDate startDen, @NotNull LocalDate slutDen,
-        @NotNull Patient patient, @NotNull Laegemiddel laegemiddel, @NotNull double antal) {
+    public PN opretPNOrdination(LocalDate startDen, LocalDate slutDen,
+         Patient patient,  Laegemiddel laegemiddel,  double antal) {
         // TODO
         if (startDen.isAfter(slutDen)) {
             throw new IllegalArgumentException("");
@@ -62,14 +62,14 @@ public class Service {
      * Pre: startDen, slutDen, patient og laegemiddel er ikke null
      */
     public DagligFast opretDagligFastOrdination(
-            @NotNull LocalDate startDen,
-            @NotNull LocalDate slutDen,
-            @NotNull Patient patient,
-            @NotNull Laegemiddel laegemiddel,
-            @NotNull double morgenAntal,
-            @NotNull double middagAntal,
-            @NotNull double aftenAntal,
-            @NotNull double natAntal) {
+            LocalDate startDen,
+            LocalDate slutDen,
+            Patient patient,
+            Laegemiddel laegemiddel,
+            double morgenAntal,
+            double middagAntal,
+            double aftenAntal,
+            double natAntal) {
         // TODO
         if (startDen.isAfter(slutDen)) {
             throw new IllegalArgumentException("");
@@ -77,10 +77,19 @@ public class Service {
             if (middagAntal >= 0 && morgenAntal >= 0 && aftenAntal >= 0 && natAntal >= 0) {
                 DagligFast dagligFast = new DagligFast(startDen, slutDen);
                 dagligFast.setLaegemiddel(laegemiddel);
-                dagligFast.opretDosis(LocalTime.);
+                dagligFast.opretDosis(LocalTime.of(8, 0), morgenAntal);
+                dagligFast.opretDosis(LocalTime.of(12, 0), middagAntal);
+                dagligFast.opretDosis(LocalTime.of(18, 0), aftenAntal);
+                dagligFast.opretDosis(LocalTime.of(24, 0), natAntal);
+                patient.addOrdination(dagligFast);
+                return dagligFast;
+            } else {
+                DagligFast dagligFast = new DagligFast(startDen, slutDen);
+                dagligFast.setLaegemiddel(laegemiddel);
+                patient.addOrdination(dagligFast);
+                return dagligFast;
             }
         }
-        return null;
     }
     
     /**
