@@ -38,19 +38,22 @@ public class Service {
      *
      * @return opretter og returnerer en PN ordination.
      */
-    public PN opretPNOrdination(LocalDate startDen, LocalDate slutDen,
+    public PN opretPNOrdination(@NotNull LocalDate startDen, @NotNull LocalDate slutDen,
         @NotNull Patient patient, @NotNull Laegemiddel laegemiddel, @NotNull double antal) {
         // TODO
         if (startDen.isAfter(slutDen)) {
             throw new IllegalArgumentException("");
         } else {
             if (patient != null && laegemiddel != null && antal >= 0) {
-                PN pn = new PN();
+                PN pn = new PN(startDen, slutDen);
+                pn.setAntalEnheder(antal);
+                pn.setLaegemiddel(laegemiddel);
+                patient.addOrdination(pn);
+                return pn;
             } else {
                 throw new NullPointerException();
             }
         }
-        return null;
     }
     
     /**
@@ -58,11 +61,25 @@ public class Service {
      * slutDato kastes en IllegalArgumentException og ordinationen oprettes ikke
      * Pre: startDen, slutDen, patient og laegemiddel er ikke null
      */
-    public DagligFast opretDagligFastOrdination(LocalDate startDen,
-        LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
-        double morgenAntal, double middagAntal, double aftenAntal,
-        double natAntal) {
+    public DagligFast opretDagligFastOrdination(
+            @NotNull LocalDate startDen,
+            @NotNull LocalDate slutDen,
+            @NotNull Patient patient,
+            @NotNull Laegemiddel laegemiddel,
+            @NotNull double morgenAntal,
+            @NotNull double middagAntal,
+            @NotNull double aftenAntal,
+            @NotNull double natAntal) {
         // TODO
+        if (startDen.isAfter(slutDen)) {
+            throw new IllegalArgumentException("");
+        } else {
+            if (middagAntal >= 0 && morgenAntal >= 0 && aftenAntal >= 0 && natAntal >= 0) {
+                DagligFast dagligFast = new DagligFast(startDen, slutDen);
+                dagligFast.setLaegemiddel(laegemiddel);
+                dagligFast.opretDosis(LocalTime.);
+            }
+        }
         return null;
     }
     

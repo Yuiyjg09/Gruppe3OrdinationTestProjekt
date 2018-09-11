@@ -33,7 +33,7 @@ public class PN extends Ordination{
 
     @Override
     public String getType() {
-        return null;
+        return this.getClass().getName();
     }
 
 

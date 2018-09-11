@@ -39,7 +39,7 @@ public class DagligFast extends Ordination {
 
     @Override
     public String getType() {
-        return null;
+        return this.getClass().getName();
     }
 
     public Dosis[] getDoser() {
@@ -65,6 +65,8 @@ public class DagligFast extends Ordination {
             }
         }
     }
+
+
 
 
 }
