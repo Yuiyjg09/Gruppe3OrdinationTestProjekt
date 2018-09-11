@@ -1,10 +1,16 @@
 package ordination;
 
+import com.sun.istack.internal.NotNull;
+
 import java.time.LocalDate;
 
-public class PN {
+public class PN extends Ordination{
 
     private double antalEnheder;
+
+    public PN(@NotNull LocalDate startDen, @NotNull LocalDate slutDen) {
+        super(startDen, slutDen);
+    }
 
     /**
      * Registrerer at der er givet en dosis paa dagen givesDen
@@ -15,12 +21,19 @@ public class PN {
      */
     public boolean givDosis(LocalDate givesDen) {
         // TODO
-        return false;   
+        if (givesDen.isAfter(this.getStartDen()) && givesDen.isBefore(this.getSlutDen())) {
+            return true;
+        } else return false;
     }
 
     public double doegnDosis() {
         // TODO
         return 0.0;
+    }
+
+    @Override
+    public String getType() {
+        return null;
     }
 
 
@@ -42,4 +55,7 @@ public class PN {
         return antalEnheder;
     }
 
+    public void setAntalEnheder(double antalEnheder) {
+        this.antalEnheder = antalEnheder;
+    }
 }
