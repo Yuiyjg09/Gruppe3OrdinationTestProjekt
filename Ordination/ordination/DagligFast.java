@@ -11,6 +11,20 @@ public class DagligFast extends Ordination {
         super(startDen, slutDen);
     }
 
+    public void opretDosis(LocalTime tid, double antal) {
+        Dosis dosis = new Dosis(tid, antal);
+        boolean free = false;
+        for (int i = 0; i < doses.length; i++) {
+            if (doses[i] == null) {
+                free = true;
+            }
+        }
+
+        if (free) {
+            this.addDosis(dosis);
+        }
+    }
+
     @Override
     public double samletDosis() {
         return 0;
@@ -26,10 +40,26 @@ public class DagligFast extends Ordination {
         return null;
     }
 
+    public Dosis[] getDoses() {
+        return doses;
+    }
+
+    public void setDoses(Dosis[] doses) {
+        this.doses = doses;
+    }
+
     public void addDosis(Dosis dosis) {
         for (int i = 0; i < doses.length; i++) {
             if (doses[i] == null) {
+                doses[i] = dosis;
+            }
+        }
+    }
 
+    public void removeDosis(Dosis dosis) {
+        for (int i = 0; i < doses.length; i++) {
+            if (doses[i] == dosis) {
+                doses[i] = null;
             }
         }
     }

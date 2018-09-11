@@ -13,7 +13,6 @@ public class Patient {
         this.cprnr = cprnr;
         this.navn = navn;
         this.vaegt = vaegt;
-        this.ordinationer = ordinationer;
     }
 
     public String getCprnr() {
