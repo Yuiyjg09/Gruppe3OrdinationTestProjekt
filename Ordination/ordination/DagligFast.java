@@ -1,5 +1,7 @@
 package ordination;
 
+import com.sun.istack.internal.NotNull;
+
 import java.time.*;
 import java.util.ArrayList;
 
@@ -7,7 +9,7 @@ public class DagligFast extends Ordination {
 
     private Dosis[] doses = new Dosis[4];
 
-    public DagligFast(LocalDate startDen, LocalDate slutDen) {
+    public DagligFast(@NotNull LocalDate startDen, @NotNull LocalDate slutDen) {
         super(startDen, slutDen);
     }
 
@@ -40,7 +42,7 @@ public class DagligFast extends Ordination {
         return null;
     }
 
-    public Dosis[] getDoses() {
+    public Dosis[] getDoser() {
         return doses;
     }
 
