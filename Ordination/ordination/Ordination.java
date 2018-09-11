@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public abstract class Ordination {
     private LocalDate startDen;
     private LocalDate slutDen;
+    private Laegemiddel laegemiddel;
 
     public Ordination(LocalDate startDen, LocalDate slutDen) {
         this.startDen = startDen;
@@ -56,4 +57,12 @@ public abstract class Ordination {
      * @return
      */
     public abstract String getType();
+
+    public Laegemiddel getLaegemiddel() {
+        return laegemiddel;
+    }
+
+    public void setLaegemiddel(Laegemiddel laegemiddel) {
+        this.laegemiddel = laegemiddel;
+    }
 }
