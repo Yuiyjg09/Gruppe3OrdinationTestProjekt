@@ -8,12 +8,9 @@ public abstract class Ordination {
     private LocalDate startDen;
     private LocalDate slutDen;
 
-    private ArrayList<Laegemiddel> lægemidler = new ArrayList<>();
-
     public Ordination(LocalDate startDen, LocalDate slutDen) {
         this.startDen = startDen;
         this.slutDen = slutDen;
-        this.lægemidler = lægemidler;
     }
 
     public LocalDate getStartDen() {

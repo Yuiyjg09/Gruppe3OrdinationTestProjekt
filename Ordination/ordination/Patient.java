@@ -13,6 +13,7 @@ public class Patient {
         this.cprnr = cprnr;
         this.navn = navn;
         this.vaegt = vaegt;
+        this.ordinationer = ordinationer;
     }
 
     public String getCprnr() {
@@ -35,7 +36,17 @@ public class Patient {
         this.vaegt = vaegt;
     }
 
-    // TODO: Metoder (med specifikation) til at vedligeholde link til Ordination
+    public ArrayList<Ordination> getOrdination() {
+        return new ArrayList<>(ordinationer);
+    }
+
+    public void addOrdination(Ordination ordination) {
+        this.ordinationer.add(ordination);
+    }
+
+    public void removeOrdination(Ordination ordination) {
+        this.ordinationer.remove(ordination);
+    }
 
     @Override
     public String toString() {
