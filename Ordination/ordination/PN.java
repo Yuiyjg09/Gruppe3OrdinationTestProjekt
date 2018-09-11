@@ -1,6 +1,6 @@
 package ordination;
 
-import com.sun.istack.internal.NotNull;
+
 
 import java.time.LocalDate;
 
@@ -8,7 +8,7 @@ public class PN extends Ordination{
 
     private double antalEnheder;
 
-    public PN(@NotNull LocalDate startDen, @NotNull LocalDate slutDen) {
+    public PN( LocalDate startDen,  LocalDate slutDen) {
         super(startDen, slutDen);
     }
 
@@ -33,7 +33,7 @@ public class PN extends Ordination{
 
     @Override
     public String getType() {
-        return null;
+        return this.getClass().getName();
     }
 
 

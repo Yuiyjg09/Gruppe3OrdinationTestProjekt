@@ -1,6 +1,6 @@
 package ordination;
 
-import com.sun.istack.internal.NotNull;
+
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class Patient {
 
     private ArrayList<Ordination> ordinationer = new ArrayList<>();
 
-    public Patient(@NotNull String cprnr, String navn, double vaegt) {
+    public Patient( String cprnr, String navn, double vaegt) {
         this.cprnr = cprnr;
         this.navn = navn;
         this.vaegt = vaegt;
