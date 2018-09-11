@@ -1,13 +1,12 @@
 package ordination;
 
-
 import java.time.*;
 
 public class DagligFast extends Ordination {
 
     private Dosis[] doses = new Dosis[4];
 
-    public DagligFast( LocalDate startDen,  LocalDate slutDen) {
+    public DagligFast(LocalDate startDen, LocalDate slutDen) {
         super(startDen, slutDen);
     }
 
@@ -21,12 +20,16 @@ public class DagligFast extends Ordination {
         }
 
         if (free) {
-            this.addDosis(dosis);
+            addDosis(dosis);
         }
     }
 
     @Override
     public double samletDosis() {
+        for (Dosis dosis : doses) {
+
+        }
+
         return 0;
     }
 
@@ -63,8 +66,5 @@ public class DagligFast extends Ordination {
             }
         }
     }
-
-
-
 
 }
