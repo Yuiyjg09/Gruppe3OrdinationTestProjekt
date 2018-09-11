@@ -114,6 +114,10 @@ public class Service {
      * IllegalArgumentException Pre: ordination og dato er ikke null
      */
     public void ordinationPNAnvendt(PN ordination, LocalDate dato) {
+        if (dato.isBefore(ordination.getStartDen()) && dato.isAfter(ordination.getSlutDen())) {
+            throw new IllegalArgumentException("ordination og dato er ikke null");
+        }
+        ordination.getStartDen().getDayOfWeek();
         // TODO
     }
 
