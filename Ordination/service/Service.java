@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import com.sun.istack.internal.NotNull;
 import ordination.DagligFast;
 import ordination.DagligSkaev;
 import ordination.Laegemiddel;
@@ -38,8 +39,17 @@ public class Service {
      * @return opretter og returnerer en PN ordination.
      */
     public PN opretPNOrdination(LocalDate startDen, LocalDate slutDen,
-        Patient patient, Laegemiddel laegemiddel, double antal) {
+        @NotNull Patient patient, @NotNull Laegemiddel laegemiddel, @NotNull double antal) {
         // TODO
+        if (startDen.isAfter(slutDen)) {
+            throw new IllegalArgumentException("");
+        } else {
+            if (patient != null && laegemiddel != null && antal >= 0) {
+                PN pn = new PN();
+            } else {
+                throw new NullPointerException();
+            }
+        }
         return null;
     }
     
