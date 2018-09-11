@@ -39,7 +39,6 @@ public class Service {
      */
     public PN opretPNOrdination(LocalDate startDen, LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
             double antal) {
-        // TODO
         if (startDen.isAfter(slutDen)) {
             throw new IllegalArgumentException("");
         } else {
@@ -62,7 +61,6 @@ public class Service {
      */
     public DagligFast opretDagligFastOrdination(LocalDate startDen, LocalDate slutDen, Patient patient,
             Laegemiddel laegemiddel, double morgenAntal, double middagAntal, double aftenAntal, double natAntal) {
-        // TODO
         if (startDen.isAfter(slutDen)) {
             throw new IllegalArgumentException("");
         } else {
@@ -95,7 +93,19 @@ public class Service {
     public DagligSkaev opretDagligSkaevOrdination(LocalDate startDen, LocalDate slutDen, Patient patient,
             Laegemiddel laegemiddel, LocalTime[] klokkeSlet, double[] antalEnheder) {
         // TODO
-        return null;
+        if (startDen.isAfter(slutDen)) {
+            DagligSkaev dagligSkaev = new DagligSkaev(startDen, slutDen);
+            dagligSkaev.setLaegemiddel(laegemiddel);
+            if (klokkeSlet.length == antalEnheder.length) {
+                for (int i = 0; i < klokkeSlet.length; i++) {
+                    dagligSkaev.opretDosis(klokkeSlet[i], antalEnheder[i]);
+                }
+            }
+            patient.addOrdination(dagligSkaev);
+            return dagligSkaev;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**
