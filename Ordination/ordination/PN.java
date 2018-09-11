@@ -71,7 +71,9 @@ public class PN extends Ordination{
      */
     public boolean givDosis(LocalDate givesDen) {
         // TODO
-        return false;   
+        if (givesDen.isAfter(this.getStartDen()) && givesDen.isBefore(this.getSlutDen())) {
+            return true;
+        } else return false;
     }
 
     public double doegnDosis() {
@@ -81,7 +83,7 @@ public class PN extends Ordination{
 
     @Override
     public String getType() {
-        return null;
+        return this.getClass().getName();
     }
 
 
