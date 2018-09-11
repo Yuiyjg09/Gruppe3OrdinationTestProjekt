@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import com.sun.istack.internal.NotNull;
 import ordination.DagligFast;
 import ordination.DagligSkaev;
 import ordination.Laegemiddel;

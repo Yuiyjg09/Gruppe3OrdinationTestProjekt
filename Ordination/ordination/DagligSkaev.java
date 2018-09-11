@@ -33,12 +33,17 @@ public class DagligSkaev extends Ordination {
 
     @Override
     public double samletDosis() {
-        return 0;
+        return doegnDosis() * (getSlutDen().getDayOfYear() - getStartDen().getDayOfYear());
     }
 
     @Override
     public double doegnDosis() {
-        return 0;
+        double doegnDosis = 0.0;
+        for (Dosis dosis:
+             doses) {
+            doegnDosis += dosis.getAntal();
+        }
+        return doegnDosis / doses.size();
     }
 
     @Override
