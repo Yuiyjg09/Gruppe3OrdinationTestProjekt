@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class DagligSkaev extends Ordination {
 
-	private ArrayList<Dosis> doses = new ArrayList<>();
+	private ArrayList<Dosis> doser = new ArrayList<>();
 
 	public DagligSkaev(LocalDate startDen, LocalDate slutDen) {
 		super(startDen, slutDen);
@@ -18,25 +18,37 @@ public class DagligSkaev extends Ordination {
 	}
 
 	public ArrayList<Dosis> getDoser() {
-		return new ArrayList<Dosis>(doses);
+		return new ArrayList<Dosis>(doser);
 	}
 
 	public void addDosis(Dosis dosis) {
-		doses.add(dosis);
+		doser.add(dosis);
 	}
 
 	public void removeDosis(Dosis dosis) {
-		doses.remove(dosis);
+		doser.remove(dosis);
 	}
 
 	@Override
 	public double samletDosis() {
-		return 0;
+		double samlet = 0.0;
+		for (Dosis d : doser) {
+			if (d != null) {
+				samlet += d.getAntal();
+			}
+		}
+		return samlet * antalDage();
 	}
 
 	@Override
 	public double doegnDosis() {
-		return 0;
+		double doegn = 0.0;
+		for (Dosis d : doser) {
+			if (d != null) {
+				doegn += d.getAntal();
+			}
+		}
+		return doegn / antalDage();
 	}
 
 	@Override

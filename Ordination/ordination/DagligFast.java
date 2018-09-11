@@ -4,7 +4,7 @@ import java.time.*;
 
 public class DagligFast extends Ordination {
 
-	private Dosis[] doses = new Dosis[4];
+	private Dosis[] doser = new Dosis[4];
 
 	public DagligFast(LocalDate startDen, LocalDate slutDen) {
 		super(startDen, slutDen);
@@ -13,12 +13,11 @@ public class DagligFast extends Ordination {
 	public void opretDosis(LocalTime tid, double antal) {
 		Dosis dosis = new Dosis(tid, antal);
 		boolean free = false;
-		for (int i = 0; i < doses.length; i++) {
-			if (doses[i] == null) {
+		for (int i = 0; i < doser.length; i++) {
+			if (doser[i] == null) {
 				free = true;
 			}
 		}
-
 		if (free) {
 			this.addDosis(dosis);
 		}
@@ -26,12 +25,24 @@ public class DagligFast extends Ordination {
 
 	@Override
 	public double samletDosis() {
-		return 0;
+		double samlet = 0.0;
+		for (Dosis d : doser) {
+			if (d != null) {
+				samlet += d.getAntal();
+			}
+		}
+		return samlet * antalDage();
 	}
 
 	@Override
 	public double doegnDosis() {
-		return 0;
+		double doegn = 0.0;
+		for (Dosis d : doser) {
+			if (d != null) {
+				doegn += d.getAntal();
+			}
+		}
+		return doegn / antalDage();
 	}
 
 	@Override
@@ -40,25 +51,25 @@ public class DagligFast extends Ordination {
 	}
 
 	public Dosis[] getDoser() {
-		return doses;
+		return doser;
 	}
 
 	public void setDoses(Dosis[] doses) {
-		this.doses = doses;
+		this.doser = doses;
 	}
 
 	public void addDosis(Dosis dosis) {
-		for (int i = 0; i < doses.length; i++) {
-			if (doses[i] == null) {
-				doses[i] = dosis;
+		for (int i = 0; i < doser.length; i++) {
+			if (doser[i] == null) {
+				doser[i] = dosis;
 			}
 		}
 	}
 
 	public void removeDosis(Dosis dosis) {
-		for (int i = 0; i < doses.length; i++) {
-			if (doses[i] == dosis) {
-				doses[i] = null;
+		for (int i = 0; i < doser.length; i++) {
+			if (doser[i] == dosis) {
+				doser[i] = null;
 			}
 		}
 	}

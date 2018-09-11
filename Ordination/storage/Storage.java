@@ -32,14 +32,14 @@ public class Storage {
 	}
 
 	/**
-	 * Returnerer en liste med alle gemte lÃ¦gemidler
+	 * Returnerer en liste med alle gemte lægemidler
 	 */
 	public List<Laegemiddel> getAllLaegemidler() {
 		return new ArrayList<Laegemiddel>(laegemidler);
 	}
 
 	/**
-	 * Gemmer lÃ¦gemiddel
+	 * Gemmer lægemiddel
 	 */
 	public void addLaegemiddel(Laegemiddel laegemiddel) {
 		if (!laegemidler.contains(laegemiddel)) {
