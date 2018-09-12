@@ -48,7 +48,7 @@ public class OpretOrdinationDialog extends Stage {
 		this.initStyle(StageStyle.UTILITY);
 		this.initModality(Modality.APPLICATION_MODAL);
 		this.setResizable(false);
-		this.setTitle("Ordinær medicin!");
+		this.setTitle("OrdinÃ¦r medicin!");
 
 		GridPane pane = new GridPane();
 		Scene scene = new Scene(pane);
@@ -63,7 +63,7 @@ public class OpretOrdinationDialog extends Stage {
 		pane.setGridLinesVisible(false);
 
 		pane.add(new Label("Patient: " + patient), 0, 0, 2, 1);
-		pane.add(new Label("Lægemiddel: "), 0, 1);
+		pane.add(new Label("Lï¿½gemiddel: "), 0, 1);
 		pane.add(new Label(laegemiddel + ""), 1, 1);
 
 		pane.add(new Label("Startdato for ordination: "), 0, 2);
@@ -71,7 +71,7 @@ public class OpretOrdinationDialog extends Stage {
 		pane.add(new Label("Slutdato for ordination: "), 0, 3);
 		pane.add(slutDato, 1, 3);
 
-		pane.add(new Label("Anbefalet antal enheder pr døgn "), 0, 4);
+		pane.add(new Label("Anbefalet antal enheder pr dÃ¸gn "), 0, 4);
 		String antal = String.format("%.2f", service.anbefaletDosisPrDoegn(patient, laegemiddel))
 				+ laegemiddel.getEnhed();
 		pane.add(new Label(antal), 1, 4);
@@ -118,7 +118,7 @@ public class OpretOrdinationDialog extends Stage {
 		} else {
 			double dose = Double.parseDouble(txtStyk.getText());
 			if (dose <= 0) {
-				lblError.setText("Dosis skal være et positivt tal");
+				lblError.setText("Dosis skal vÃ¦re et positivt tal");
 			}
 			try {
 				service.opretPNOrdination(startDato.getValue(), slutDato.getValue(), patient, laegemiddel, dose);
@@ -160,7 +160,7 @@ public class OpretOrdinationDialog extends Stage {
 			if (dose >= 0) {
 				doser[index] = dose;
 			} else {
-				throw new IllegalArgumentException("Dosis skal være et positivt tal");
+				throw new IllegalArgumentException("Dosis skal vÃ¦re et positivt tal");
 			}
 		}
 	}
