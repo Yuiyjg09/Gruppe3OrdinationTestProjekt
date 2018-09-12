@@ -38,10 +38,9 @@ public class OpretOrdinationDialog extends Stage {
 
 	private Service service;
 
-	public OpretOrdinationDialog(Patient patient, Laegemiddel laegemiddel,
-			TypeOrdination type) {
-	    this.service = Service.getService();
-	    
+	public OpretOrdinationDialog(Patient patient, Laegemiddel laegemiddel, TypeOrdination type) {
+		this.service = Service.getService();
+
 		this.patient = patient;
 		this.laegemiddel = laegemiddel;
 		this.type = type;
@@ -49,7 +48,7 @@ public class OpretOrdinationDialog extends Stage {
 		this.initStyle(StageStyle.UTILITY);
 		this.initModality(Modality.APPLICATION_MODAL);
 		this.setResizable(false);
-		this.setTitle("OrdinÃ©r medicin!");
+		this.setTitle("Ordinær medicin!");
 
 		GridPane pane = new GridPane();
 		Scene scene = new Scene(pane);
@@ -64,7 +63,7 @@ public class OpretOrdinationDialog extends Stage {
 		pane.setGridLinesVisible(false);
 
 		pane.add(new Label("Patient: " + patient), 0, 0, 2, 1);
-		pane.add(new Label("LÃ¦gemiddel: "), 0, 1);
+		pane.add(new Label("Lægemiddel: "), 0, 1);
 		pane.add(new Label(laegemiddel + ""), 1, 1);
 
 		pane.add(new Label("Startdato for ordination: "), 0, 2);
@@ -72,9 +71,8 @@ public class OpretOrdinationDialog extends Stage {
 		pane.add(new Label("Slutdato for ordination: "), 0, 3);
 		pane.add(slutDato, 1, 3);
 
-		pane.add(new Label("Anbefalet antal enheder pr dÃ¸gn "), 0, 4);
-		String antal = String.format("%.2f",
-				service.anbefaletDosisPrDoegn(patient, laegemiddel))
+		pane.add(new Label("Anbefalet antal enheder pr døgn "), 0, 4);
+		String antal = String.format("%.2f", service.anbefaletDosisPrDoegn(patient, laegemiddel))
 				+ laegemiddel.getEnhed();
 		pane.add(new Label(antal), 1, 4);
 
@@ -120,11 +118,10 @@ public class OpretOrdinationDialog extends Stage {
 		} else {
 			double dose = Double.parseDouble(txtStyk.getText());
 			if (dose <= 0) {
-				lblError.setText("Dosis skal vÃ¦re et positivt tal");
+				lblError.setText("Dosis skal være et positivt tal");
 			}
 			try {
-				service.opretPNOrdination(startDato.getValue(),
-						slutDato.getValue(), patient, laegemiddel, dose);
+				service.opretPNOrdination(startDato.getValue(), slutDato.getValue(), patient, laegemiddel, dose);
 			} catch (IllegalArgumentException e) {
 				lblError.setText(e.getMessage());
 				return;
@@ -147,8 +144,7 @@ public class OpretOrdinationDialog extends Stage {
 			parseField(dagligFastPane.getAften(), doser, 2);
 			parseField(dagligFastPane.getNat(), doser, 3);
 
-			service.opretDagligFastOrdination(startDato.getValue(),
-					slutDato.getValue(), patient, laegemiddel, doser[0],
+			service.opretDagligFastOrdination(startDato.getValue(), slutDato.getValue(), patient, laegemiddel, doser[0],
 					doser[1], doser[2], doser[3]);
 		} catch (IllegalArgumentException e) {
 			lblError.setText(e.getMessage());
@@ -164,8 +160,7 @@ public class OpretOrdinationDialog extends Stage {
 			if (dose >= 0) {
 				doser[index] = dose;
 			} else {
-				throw new IllegalArgumentException(
-						"Dosis skal vÃ¦re et positivt tal");
+				throw new IllegalArgumentException("Dosis skal være et positivt tal");
 			}
 		}
 	}
@@ -178,8 +173,7 @@ public class OpretOrdinationDialog extends Stage {
 
 		String[] doser = dagligSkaevPane.getDosisArray();
 		try {
-			service.opretDagligSkaevOrdination(startDato.getValue(),
-					slutDato.getValue(), patient, laegemiddel,
+			service.opretDagligSkaevOrdination(startDato.getValue(), slutDato.getValue(), patient, laegemiddel,
 					makeKlokkeSlet(doser), makeAntal(doser));
 		} catch (IllegalArgumentException e) {
 			lblError.setText(e.getMessage());
@@ -195,8 +189,7 @@ public class OpretOrdinationDialog extends Stage {
 				resultat[i] = LocalTime.parse(model[i].substring(0, 5));
 			}
 		} catch (RuntimeException e) {
-			throw new IllegalArgumentException(
-					"Klokkeslet er ikke korrekt angivet");
+			throw new IllegalArgumentException("Klokkeslet er ikke korrekt angivet");
 		}
 		return resultat;
 	}
@@ -209,10 +202,8 @@ public class OpretOrdinationDialog extends Stage {
 				resultat[i] = dosis;
 			}
 		} catch (RuntimeException e) {
-			throw new IllegalArgumentException(
-					"Der er ikke angivet korrekt antal");
+			throw new IllegalArgumentException("Der er ikke angivet korrekt antal");
 		}
 		return resultat;
 	}
-
 }

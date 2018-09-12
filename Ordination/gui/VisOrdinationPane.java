@@ -26,44 +26,34 @@ public class VisOrdinationPane extends GridPane {
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
 
-		this.add(new Label("VÃ¦lg patient"), 0, 0);
+		this.add(new Label("Vælg patient"), 0, 0);
 		this.add(lstPatient, 0, 1);
 		lstPatient.getItems().setAll(service.getAllPatienter());
-		lstPatient
-				.getSelectionModel()
-				.selectedIndexProperty()
-				.addListener(
-						observable -> {
-							lstOrdination.getItems().setAll(
-									lstPatient.getSelectionModel()
-											.getSelectedItem()
-											.getOrdinationer());
-						});
+		lstPatient.getSelectionModel().selectedIndexProperty().addListener(observable -> {
+			lstOrdination.getItems().setAll(lstPatient.getSelectionModel().getSelectedItem().getOrdinationer());
+		});
 		lstPatient.getSelectionModel().selectFirst();
 
-		this.add(new Label("VÃ¦lg ordination"), 1, 0);
+		this.add(new Label("Vælg ordination"), 1, 0);
 		this.add(lstOrdination, 1, 1);
-		lstOrdination.getSelectionModel().selectedItemProperty()
-				.addListener(observable -> {
-					updateDetails();
-				});
+		lstOrdination.getSelectionModel().selectedItemProperty().addListener(observable -> {
+			updateDetails();
+		});
 
 		this.add(new Label("Ordinationsdetaljer"), 2, 0);
 		this.add(ordinationDetailsPane, 2, 1);
 	}
 
 	public void updateDetails() {
-		Ordination ordination = lstOrdination.getSelectionModel()
-				.getSelectedItem();
+		Ordination ordination = lstOrdination.getSelectionModel().getSelectedItem();
 		ordinationDetailsPane.clear();
 		if (ordination != null) {
 			ordinationDetailsPane.clear();
 			ordinationDetailsPane.setOrdination(ordination);
 			if (ordination instanceof DagligFast) {
 				DagligFast dagligFast = (DagligFast) ordination;
-				ordinationDetailsPane.setFast(dagligFast.getDoser()[0],
-						dagligFast.getDoser()[1], dagligFast.getDoser()[2],
-						dagligFast.getDoser()[3]);
+				ordinationDetailsPane.setFast(dagligFast.getDoser()[0], dagligFast.getDoser()[1],
+						dagligFast.getDoser()[2], dagligFast.getDoser()[3]);
 			} else if (ordination instanceof DagligSkaev) {
 				ordinationDetailsPane.setSkaev((DagligSkaev) ordination);
 			} else if (ordination instanceof PN) {
@@ -77,9 +67,7 @@ public class VisOrdinationPane extends GridPane {
 		if (lstOrdination.getSelectionModel().getSelectedItem() != null) {
 			selected = lstOrdination.getSelectionModel().getSelectedIndex();
 		}
-		lstOrdination.getItems().setAll(
-				lstPatient.getSelectionModel().getSelectedItem()
-						.getOrdinationer());
+		lstOrdination.getItems().setAll(lstPatient.getSelectionModel().getSelectedItem().getOrdinationer());
 		lstOrdination.getSelectionModel().select(selected);
 	}
 }
