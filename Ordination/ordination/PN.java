@@ -32,7 +32,7 @@ public class PN extends Ordination {
 
 	/**
 	 * (antal gange ordinationen er anvendt * antal enheder) / (antal dage mellem
-	 * første og sidste givning)
+	 * fï¿½rste og sidste givning)
 	 */
 	public double doegnDosis() {
 		return (antalGangeGivet * antalEnheder) / ChronoUnit.DAYS.between(getStartDen(), getSlutDen());

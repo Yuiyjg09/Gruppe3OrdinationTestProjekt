@@ -26,7 +26,7 @@ public class VisOrdinationPane extends GridPane {
 		this.setVgap(10);
 		this.setGridLinesVisible(false);
 
-		this.add(new Label("Vælg patient"), 0, 0);
+		this.add(new Label("VÃ¦lg patient"), 0, 0);
 		this.add(lstPatient, 0, 1);
 		lstPatient.getItems().setAll(service.getAllPatienter());
 		lstPatient.getSelectionModel().selectedIndexProperty().addListener(observable -> {
@@ -34,7 +34,7 @@ public class VisOrdinationPane extends GridPane {
 		});
 		lstPatient.getSelectionModel().selectFirst();
 
-		this.add(new Label("Vælg ordination"), 1, 0);
+		this.add(new Label("VÃ¦lg ordination"), 1, 0);
 		this.add(lstOrdination, 1, 1);
 		lstOrdination.getSelectionModel().selectedItemProperty().addListener(observable -> {
 			updateDetails();

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import com.sun.istack.internal.NotNull;
 import ordination.DagligFast;
 import ordination.DagligSkaev;
 import ordination.Laegemiddel;
@@ -14,6 +13,7 @@ import ordination.Patient;
 import storage.Storage;
 
 public class Service {
+
 	private Storage storage;
 	private static Service service;
 
@@ -231,3 +231,4 @@ public class Service {
 				storage.getAllPatienter().get(1), storage.getAllLaegemidler().get(2), kl, an);
 	}
 }
+
