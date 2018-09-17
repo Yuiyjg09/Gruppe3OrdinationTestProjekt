@@ -28,7 +28,7 @@ public class DagligFastPane extends GridPane {
 
 	public void setMorgen(String morgen) {
 		txtMorgen.setText(morgen);
-	}
+	} 
 
 	public void setMiddag(String middag) {
 		txtMiddag.setText(middag);
