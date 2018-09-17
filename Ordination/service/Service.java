@@ -41,7 +41,6 @@ public class Service {
 	 */
 	public PN opretPNOrdination(LocalDate startDen, LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
 			double antal) {
-		// TODO
 		if (startDen.isAfter(slutDen)) {
 			throw new IllegalArgumentException("");
 		} else {
@@ -52,7 +51,7 @@ public class Service {
 				patient.addOrdination(pn);
 				return pn;
 			} else {
-				throw new NullPointerException();
+				throw new IllegalArgumentException();
 			}
 		}
 	}
@@ -64,7 +63,6 @@ public class Service {
 	 */
 	public DagligFast opretDagligFastOrdination(LocalDate startDen, LocalDate slutDen, Patient patient,
 			Laegemiddel laegemiddel, double morgenAntal, double middagAntal, double aftenAntal, double natAntal) {
-		// TODO
 		if (startDen.isAfter(slutDen)) {
 			throw new IllegalArgumentException("");
 		} else {
@@ -74,14 +72,11 @@ public class Service {
 				dagligFast.opretDosis(LocalTime.of(8, 0), morgenAntal);
 				dagligFast.opretDosis(LocalTime.of(12, 0), middagAntal);
 				dagligFast.opretDosis(LocalTime.of(18, 0), aftenAntal);
-				dagligFast.opretDosis(LocalTime.of(24, 0), natAntal);
+				dagligFast.opretDosis(LocalTime.of(23, 0), natAntal);
 				patient.addOrdination(dagligFast);
 				return dagligFast;
 			} else {
-				DagligFast dagligFast = new DagligFast(startDen, slutDen);
-				dagligFast.setLaegemiddel(laegemiddel);
-				patient.addOrdination(dagligFast);
-				return dagligFast;
+				throw new IllegalArgumentException();
 			}
 		}
 	}
@@ -112,12 +107,12 @@ public class Service {
 	}
 
 	/**
-	 * En dato for hvorn�r ordinationen anvendes tilf�jes ordinationen. Hvis
-	 * datoen ikke er indenfor ordinationens gyldighedsperiode kastes en
+	 * En dato for hvorn�r ordinationen anvendes tilf�jes ordinationen. Hvis datoen
+	 * ikke er indenfor ordinationens gyldighedsperiode kastes en
 	 * IllegalArgumentException Pre: ordination og dato er ikke null
 	 */
 	public void ordinationPNAnvendt(PN ordination, LocalDate dato) {
-		if (ordination.getStartDen().isBefore(dato)) {
+		if (ordination.getStartDen().isAfter(dato)) {
 			throw new IllegalArgumentException("");
 		}
 		if (ordination.getSlutDen().isBefore(dato)) {
@@ -129,8 +124,7 @@ public class Service {
 	/**
 	 * Den anbefalede dosis for den p�g�ldende patient (der skal tages hensyn til
 	 * patientens v�gt). Det er en forskellig enheds faktor der skal anvendes, og
-	 * den er afh�ngig af patientens v�gt. Pre: patient og l�gemiddel er ikke
-	 * null
+	 * den er afh�ngig af patientens v�gt. Pre: patient og l�gemiddel er ikke null
 	 */
 	public double anbefaletDosisPrDoegn(Patient patient, Laegemiddel laegemiddel) {
 		double result;
@@ -222,7 +216,7 @@ public class Service {
 				storage.getAllLaegemidler().get(1), 123);
 
 		opretDagligFastOrdination(LocalDate.of(2015, 1, 10), LocalDate.of(2015, 1, 12),
-				storage.getAllPatienter().get(1), storage.getAllLaegemidler().get(1), 2, -1, 1, -1);
+				storage.getAllPatienter().get(1), storage.getAllLaegemidler().get(1), 2, 1, 1, 1);
 
 		LocalTime[] kl = { LocalTime.of(12, 0), LocalTime.of(12, 40), LocalTime.of(16, 0), LocalTime.of(18, 45) };
 		double[] an = { 0.5, 1, 2.5, 3 };
@@ -231,4 +225,3 @@ public class Service {
 				storage.getAllPatienter().get(1), storage.getAllLaegemidler().get(2), kl, an);
 	}
 }
-
